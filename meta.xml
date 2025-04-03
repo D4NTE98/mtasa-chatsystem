@@ -1,0 +1,11 @@
+<meta>
+    <info author="D4NTE" version="1.0" name="mtasa-chatsystem" />
+    
+    <script src="client/c_chat.lua" type="client" cache="false" />
+    <file src="assets/ui.html" />
+    
+    <script src="server/s_chat.lua" type="server" />
+    
+    <export function="addMessage" type="client" />
+    <export function="broadcastMessage" type="server" />
+</meta>

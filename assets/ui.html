@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .chat-container {
+            position: fixed;
+            bottom: 50px;
+            left: 20px;
+            width: 400px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 5px;
+            font-family: 'Arial';
+            transition: 0.3s all;
+        }
+        
+        .messages-box {
+            height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            color: white;
+        }
+        
+        .input-box {
+            padding: 10px;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        input {
+            width: 100%;
+            padding: 8px;
+            background: none;
+            border: 1px solid #555;
+            color: white;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="messages-box" id="messages"></div>
+        <div class="input-box">
+            <input type="text" id="input" placeholder="Say hello..">
+        </div>
+    </div>
+
+    <script>
+        const input = document.getElementById('input');
+        const messagesDiv = document.getElementById('messages');
+
+        input.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') {
+                mp.trigger('chatbox:messageSent', input.value);
+                input.value = '';
+            }
+        });
+
+        function addMessage(msg, type) {
+            const elem = document.createElement('div');
+            elem.style.color = type === 'error' ? 'red' : 'white';
+            elem.textContent = msg;
+            messagesDiv.appendChild(elem);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+        addMessage('mtasa-chatsystem: Hello World!', 'normal');
+
+        mp.events.add('chatbox:addMessage', addMessage);
+    </script>
+</body>
+</html>
